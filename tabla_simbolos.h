@@ -14,9 +14,9 @@ void PTS_eliminar();                                      //Pendiente
 T_Simbolos TS_pop();                                      //Pendiente
 void S_eliminar();                                        //Pendiente
 /* Impresion */
-void PTS_imprimir();                                      //Pendiente
-void TS_imprimir();                                       //Pendiente
-void S_imprimir();                                        //Pendiente
+void PTS_imprimir();                                      //Lista
+void TS_imprimir();                                       //Lista
+void S_imprimir();                                        //Lista
 /* Busqueda */
 
 
