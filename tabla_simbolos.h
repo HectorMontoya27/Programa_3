@@ -5,19 +5,19 @@
 
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
-Pila_T_Simbolos* PTS_nueva();                             //Lista
-T_Simbolos* TS_nueva();                                   //Lista
-Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs);    //Lista
-void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);  //Lista
-void TS_nuevoRegistro(T_Simbolos* tabla);                 //Lista
+Pila_T_Simbolos* PTS_nueva();                                                         //Lista
+T_Simbolos* TS_nueva();                                                               //Lista
+Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs);   //Lista
+void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);                              //Lista
+void TS_nuevoRegistro(T_Simbolos* tabla);                                             //Lista
 /* Eliminacion */
-void PTS_eliminar();                                      //Pendiente
-T_Simbolos TS_pop();                                      //Pendiente
-void S_eliminar();                                        //Pendiente
+void PTS_eliminar();                                                                  //Pendiente
+T_Simbolos TS_pop();                                                                  //Pendiente
+void S_eliminar();                                                                    //Pendiente
 /* Impresion */
-void PTS_imprimir();                                      //Lista
-void TS_imprimir();                                       //Lista
-void S_imprimir();                                        //Lista
+void PTS_imprimir();                                                                  //Lista
+void TS_imprimir();                                                                   //Lista
+void S_imprimir();                                                                    //Lista
 /* Busqueda */
 
 /* --------------------------- Formato de Documentacion ------------------------- */

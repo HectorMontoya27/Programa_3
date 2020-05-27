@@ -45,13 +45,6 @@ void TT_getTam(int tipo);                                 //Pendiente
 --Autor:
 --Fecha de creacion:
 */
-
-/*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
-*/
 Pila_T_Tipos* PTT_nueva(){}
 
 /*
