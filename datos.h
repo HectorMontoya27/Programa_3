@@ -64,8 +64,8 @@ struct T_TIPOS{
 };
 
 /* Pila de tablas de simbolos */
-typedef struct PILS_T_SIMBOLOS Pila_T_Simbolos;
-struct PILS_T_SIMBOLOS{
+typedef struct PILA_T_SIMBOLOS Pila_T_Simbolos;
+struct PILA_T_SIMBOLOS{
     T_Simbolos *inicio;
     T_Simbolos *cabeza;
     int num;

@@ -8,14 +8,15 @@
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
 Pila_T_Simbolos* PTS_nueva();                                                         //Lista
-T_Simbolos* TS_nueva();                                                               //Lista
-Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs);   //Lista
+T_Simbolos* TS_nueva(char nombre[]);                                                  //Lista
+Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs);       //Lista
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);                              //Lista
-void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim);                                             //Lista
+void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim);                               //Lista
 /* Eliminacion */
-void PTS_eliminar();                                                                  //Pendiente
-T_Simbolos TS_pop();                                                                  //Pendiente
-void S_eliminar();                                                                    //Pendiente
+void PTS_eliminar(Pila_T_Simbolos *pila);                                             //Lista
+T_Simbolos* PTS_pop(Pila_T_Simbolos *pila);                                           //Lista
+void TS_eliminar(T_Simbolos *tabla);                                                  //Lista
+void S_eliminar(Simbolo *sim);                                                        //Lista
 /* Impresion */
 void PTS_imprimir();                                                                  //Lista
 void TS_imprimir();                                                                   //Lista
@@ -58,10 +59,14 @@ Pila_T_Simbolos* PTS_nueva(){
 --Descripcion: Creacion de memoria para una tabla de simbolos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrega un argumento para el nombre de la tabla
 */
-T_Simbolos* TS_nueva(){
+T_Simbolos* TS_nueva(char nombre[]){
     T_Simbolos *tabla;
     tabla = (T_Simbolos *)malloc(sizeof(T_Simbolos));
+    strcpy(tabla->nombre,nombre);
     tabla->num = 0;
     return tabla;
 }
@@ -131,28 +136,63 @@ void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
 }
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTS_eliminar()
+--Descripcion: Se hace la eliminacion de la pila pero primero se hace la eliminacion de la pila
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 27 Mayo 2020
 */
-void PTS_eliminar(){}
+void PTS_eliminar(Pila_T_Simbolos *pila){
+    while (pila->num != 0) {
+        TS_eliminar(PTS_pop(pila));
+    }
+    free(pila);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTS_pop()
+--Descripcion: Se hace un POP a la pila de tablas de simbolos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 27 Mayo 2020
 */
-T_Simbolos TS_pop(){}
+T_Simbolos* PTS_pop(Pila_T_Simbolos *pila){
+    T_Simbolos *tabla;
+    if (pila->cabeza == NULL) { return NULL; }
+    tabla = pila->cabeza;
+    pila->cabeza = tabla->anterior;
+    if (pila->cabeza != NULL) {pila->cabeza->siguente = NULL;}
+    else {pila->inicio = NULL;}
+    pila->num = pila->num - 1;
+    tabla->siguente = NULL;
+    tabla->anterior = NULL;
+    return tabla;
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: TS_eliminar()
+--Descripcion: Se hace la liberacion de memoria de una tabla junto con sus registros
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 27 Mayo 2020
 */
-void S_eliminar(){}
+void TS_eliminar(T_Simbolos *tabla){
+    Simbolo *sim, *sim2;
+    sim = tabla->inicio;
+    while (sim != NULL) {
+        sim2 = sim->siguente;
+        S_eliminar(sim);
+        sim = sim2;
+    }
+    free(tabla);
+}
+
+/*
+--Nombre Funcion: S_eliminar()
+--Descripcion: Se libera la memoria de un registro para simbolo
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 27 Mayo 2020
+*/
+void S_eliminar(Simbolo *sim){
+    free(sim);
+}
 
 /*
 --Nombre Funcion: PTS_imprimir()
