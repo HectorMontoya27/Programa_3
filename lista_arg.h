@@ -1,6 +1,8 @@
 #ifndef LISTA_ARG_H
 #define LISTA_ARG_H
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "datos.h"
 
 /* -------------------------Declaracion de Funciones -------------------------- */

@@ -1,15 +1,17 @@
 #ifndef TABLA_SIMBOLOS_H
 #define TABLA_SIMBOLOS_H
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "datos.h"
 
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
 Pila_T_Simbolos* PTS_nueva();                                                         //Lista
 T_Simbolos* TS_nueva();                                                               //Lista
-Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs);   //Lista
+Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs);   //Lista
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);                              //Lista
-void TS_nuevoRegistro(T_Simbolos* tabla);                                             //Lista
+void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim);                                             //Lista
 /* Eliminacion */
 void PTS_eliminar();                                                                  //Pendiente
 T_Simbolos TS_pop();                                                                  //Pendiente
@@ -47,7 +49,7 @@ void S_imprimir();                                                              
 Pila_T_Simbolos* PTS_nueva(){
     Pila_T_Simbolos *pila;
     pila = (Pila_T_Simbolos *)malloc(sizeof(Pila_T_Simbolos));
-    pila.num = 0;
+    pila->num = 0;
     return pila;
 }
 
@@ -60,7 +62,7 @@ Pila_T_Simbolos* PTS_nueva(){
 T_Simbolos* TS_nueva(){
     T_Simbolos *tabla;
     tabla = (T_Simbolos *)malloc(sizeof(T_Simbolos));
-    tabla.num = 0;
+    tabla->num = 0;
     return tabla;
 }
 
@@ -73,15 +75,14 @@ T_Simbolos* TS_nueva(){
 --Autor modificacion: Héctor Montoya Pérez
 --Descripcion de modificacion: Se agrego argumentos a la funcion para agregar la lista de argumentos y tamaño
 */
-Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs){
+Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs){
     Simbolo *sim;
-    sim = (Simbolo *)malloc(sizeof(Simbolo));
-    sim.id = id;
-    sim.dir = dir;
-    sim.tipo = tipo;
-    sim.var = var;
-    sim.lista = lista;
-    sim.numArgs = numArgs;
+    sim = malloc(sizeof(Simbolo));
+    strcpy(sim->id,id);
+    sim->tipo = tipo;
+    strcpy(sim->var,var);
+    sim->lista = lista;
+    sim->numArgs = numArgs;
     return sim;
 }
 
@@ -93,15 +94,15 @@ Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArg
 */
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
     if (pila = NULL){ printf("No existe pila\n"); }
-    if (pila.num = 0 || pila.inicio = NULL) {
-        pila.inicio = tabla;
-        pila.cabeza = tabla;
-        pila.num = 1;
+    if (pila->num == 0 || pila->inicio == NULL) {
+        pila->inicio = tabla;
+        pila->cabeza = tabla;
+        pila->num = 1;
     } else {
-        pila.cabeza.siguente = tabla;
-        tabla.anterior = pila.cabeza;
-        pila.cabeza = tabla;
-        pila.num = pila.num + 1;
+        pila->cabeza->siguente = tabla;
+        tabla->anterior = pila->cabeza;
+        pila->cabeza = tabla;
+        pila->num = pila->num + 1;
     }
 }
 
@@ -112,20 +113,20 @@ void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
 --Fecha de creacion: 26 Mayo 2020
 */
 void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
-    if (tabla = NULL){ printf("No existe tabla\n"); }
-    if (tabla.num = 0 || tabla.inicio = NULL){
-        tabla.inicio = sim;
-        tabla.cabeza = sim;
-        tabla.num = 1;
-        sim.pos = 1;
-        sim.dir = 0;
+    if (tabla == NULL){ printf("No existe tabla\n"); }
+    if (tabla->num == 0 || tabla->inicio == NULL){
+        tabla->inicio = sim;
+        tabla->cabeza = sim;
+        tabla->num = 1;
+        sim->pos = 1;
+        sim->dir = 0;
     } else {
-        sim.dir = tabla.cabeza.dir + TT_getTam(sim.tipo);
-        tabla.cabeza.siguente = sim;
-        sim.anterior = tabla.cabeza;
-        tabla.cabeza = sim;
-        tabla.num = tabla.num + 1;
-        sim.pos = tabla.num;
+        sim->dir = tabla->cabeza->dir + TT_getTam(sim->tipo);
+        tabla->cabeza->siguente = sim;
+        sim->anterior = tabla->cabeza;
+        tabla->cabeza = sim;
+        tabla->num = tabla->num + 1;
+        sim->pos = tabla->num;
     }
 }
 
@@ -161,12 +162,12 @@ void S_eliminar(){}
 */
 void PTS_imprimir(Pila_T_Simbolos *pila){
     T_Simbolos *tabla;
-    tabla = pila.inicio;
+    tabla = pila->inicio;
     printf("   TABLAS DE LA PILA\n");
     while (tabla != NULL) {
         printf("\n");
         TS_imprimir(tabla);
-        tabla = tabla.siguente;
+        tabla = tabla->siguente;
     }
 }
 
@@ -178,11 +179,11 @@ void PTS_imprimir(Pila_T_Simbolos *pila){
 */
 void TS_imprimir(T_Simbolos *tabla){
     Simbolo *sim;
-    sim = tabla.inicio;
+    sim = tabla->inicio;
     printf("\tPos\tID\tDir\tTipo\tVar\n");
     while (sim != NULL) {
         S_imprimir(sim);
-        sim = sim.siguente;
+        sim = sim->siguente;
     }
 }
 
@@ -193,7 +194,7 @@ void TS_imprimir(T_Simbolos *tabla){
 --Fecha de creacion: 26 Mayo 2020
 */
 void S_imprimir(Simbolo *sim){
-    printf("\t%d\t%s\t%d\t%d\t%s\n", sim.pos, sim.id, sim.dir, sim.tipo, sim.var);
+    printf("\t%d\t%s\t%d\t%d\t%s\n", sim->pos, sim->id, sim->dir, sim->tipo, sim->var);
 }
 
 #endif

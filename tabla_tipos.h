@@ -1,6 +1,8 @@
 #ifndef TABLA_TIPOS_H
 #define TABLA_TIPOS_H
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "datos.h"
 
 /* -------------------------Declaracion de Funciones -------------------------- */
@@ -19,7 +21,7 @@ void PTT_imprimir();                                      //Pendiente
 void TT_imprimir();                                       //Pendiente
 void T_imprimir();                                        //Pendiente
 /* Busqueda */
-void TT_getTam(int tipo);                                 //Pendiente
+int TT_getTam(int tipo);                                 //Pendiente
 
 /* --------------------------- Formato de Documentacion ------------------------- */
 
@@ -133,6 +135,6 @@ void T_imprimir(){}
 --Autor:
 --Fecha de creacion:
 */
-void TT_getTam(int tipo){}
+int TT_getTam(int tipo){}
 
-#endid
+#endif
