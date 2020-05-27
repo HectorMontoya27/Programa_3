@@ -1,7 +1,9 @@
 #ifndef TABLA_TIPOS_H
 #define TABLA_TIPOS_H
 #include <stdio.h>
+#include "datos.h"
 
+/* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
 Pila_T_Tipos* PTT_nueva();                                //Pendiente
 T_Tipos* TT_nueva();                                      //Pendiente
@@ -18,6 +20,22 @@ void TT_imprimir();                                       //Pendiente
 void T_imprimir();                                        //Pendiente
 /* Busqueda */
 void TT_getTam(int tipo);                                 //Pendiente
+
+/* --------------------------- Formato de Documentacion ------------------------- */
+
+// Documentacion de Creacion - Copiar y pegar
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+// Documentacion de Modificacion - Copiar y pegar
+/*
+--Fecha de modificacion:
+--Autor modificacion:
+--Descripcion de modificacion:
+*/
 
 /* -------------------------------- Funciones -------------------------------- */
 

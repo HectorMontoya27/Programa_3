@@ -1,12 +1,13 @@
 #ifndef TABLA_SIMBOLOS_H
 #define TABLA_SIMBOLOS_H
 #include <stdio.h>
-#include "tabla_tipos.h"
+#include "datos.h"
 
+/* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
 Pila_T_Simbolos* PTS_nueva();                             //Lista
 T_Simbolos* TS_nueva();                                   //Lista
-Simbolo* S_nuevo(char[32] id, int tipo,char[32] vars);    //Lista
+Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs);    //Lista
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);  //Lista
 void TS_nuevoRegistro(T_Simbolos* tabla);                 //Lista
 /* Eliminacion */
@@ -19,15 +20,23 @@ void TS_imprimir();                                       //Lista
 void S_imprimir();                                        //Lista
 /* Busqueda */
 
+/* --------------------------- Formato de Documentacion ------------------------- */
 
-/* -------------------------------- Funciones -------------------------------- */
-
+// Documentacion de Creacion - Copiar y pegar
 /*
 --Nombre Funcion:
 --Descripcion:
 --Autor:
 --Fecha de creacion:
 */
+// Documentacion de Modificacion - Copiar y pegar
+/*
+--Fecha de modificacion:
+--Autor modificacion:
+--Descripcion de modificacion:
+*/
+
+/* -------------------------------- Funciones -------------------------------- */
 
 /*
 --Nombre Funcion: PTS_nueva()
@@ -60,14 +69,19 @@ T_Simbolos* TS_nueva(){
 --Descripcion: Creacion de memoria para un nuevo registro de simbolos con parametros
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrego argumentos a la funcion para agregar la lista de argumentos y tamaño
 */
-Simbolo* S_nuevo(char[32] id, int tipo,char[32] var){
+Simbolo* S_nuevo(char[32] id, int tipo,char[32] var, list_arg* lista, int numArgs){
     Simbolo *sim;
     sim = (Simbolo *)malloc(sizeof(Simbolo));
     sim.id = id;
     sim.dir = dir;
     sim.tipo = tipo;
     sim.var = var;
+    sim.lista = lista;
+    sim.numArgs = numArgs;
     return sim;
 }
 

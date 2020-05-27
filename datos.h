@@ -1,6 +1,19 @@
 #ifndef DATOS_H
 #define DATOS_H
 
+/* Argumento */
+typedef struct {
+    int tipo;
+    arg *siguente;
+} arg;
+
+/* Lista de argumentos */
+typedef struct {
+    arg *inicio;
+    arg *final;
+    int tam;
+} list_arg;
+
 /* Registro de simbolos */
 typedef struct {
     int pos;
@@ -8,6 +21,8 @@ typedef struct {
     int dir;
     int tipo;
     char var[32];
+    list_arg *lista;
+    int numArgs;
     Simbolo *siguente;
     Simbolo *anterior;
 } Simbolo;
@@ -24,6 +39,7 @@ typedef struct {
 
 /* Tabla de simbolos */
 typedef struct {
+    char nombre[32];
     simbolo *inicio;
     simbolo *cabeza;
     int num;
@@ -33,6 +49,7 @@ typedef struct {
 
 /* Tabla de tipos */
 typedef struct {
+    char nombre[32];
     tipo *inicio;
     tipo *cabeza;
     int num;
