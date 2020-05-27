@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 /* Creacion */
-Pila_T_Tipos* PTT_nueva();                             //Lista
-T_Tipos* TT_nueva();                                   //Lista
-Tipo* T_nuevo();    //Lista
-void PTT_push(Pila_T_Tipos *pila, T_Simbolos *tabla);  //Lista
-void TT_nuevoRegistro(T_Tipos* tabla);                 //Lista
+Pila_T_Tipos* PTT_nueva();                                //Pendiente
+T_Tipos* TT_nueva();                                      //Pendiente
+Tipo* T_nuevo();                                          //Pendiente
+void PTT_push(Pila_T_Tipos *pila, T_Simbolos *tabla);     //Pendiente
+void TT_nuevoRegistro(T_Tipos* tabla);                    //Pendiente
 /* Eliminacion */
 void PTT_eliminar();                                      //Pendiente
 T_Simbolos TT_pop();                                      //Pendiente
@@ -17,6 +17,16 @@ void PTT_imprimir();                                      //Pendiente
 void TT_imprimir();                                       //Pendiente
 void T_imprimir();                                        //Pendiente
 /* Busqueda */
-void TT_getTam(int tipo);
+void TT_getTam(int tipo);                                 //Pendiente
+
+/* -------------------------------- Funciones -------------------------------- */
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+
 
 #endid
