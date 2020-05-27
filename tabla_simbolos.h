@@ -113,4 +113,52 @@ void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
     }
 }
 
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+void PTS_eliminar(){}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+T_Simbolos TS_pop(){}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+void S_eliminar(){}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+void PTS_imprimir(){}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+void TS_imprimir(){}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+void S_imprimir(){}
+
 #endif
