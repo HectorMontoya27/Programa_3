@@ -140,27 +140,46 @@ T_Simbolos TS_pop(){}
 void S_eliminar(){}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTS_imprimir()
+--Descripcion: Funcion para imprimir una pila de tabla de simbolos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 26 Mayo 2020
 */
-void PTS_imprimir(){}
+void PTS_imprimir(Pila_T_Simbolos *pila){
+    T_Simbolos *tabla;
+    tabla = pila.inicio;
+    printf("   TABLAS DE LA PILA\n");
+    while (tabla != NULL) {
+        printf("\n");
+        TS_imprimir(tabla);
+        tabla = tabla.siguente;
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: TS_imprimir()
+--Descripcion: Funcion para imprimir una tabla de simbolos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 26 Mayo 2020
 */
-void TS_imprimir(){}
+void TS_imprimir(T_Simbolos *tabla){
+    Simbolo *sim;
+    sim = tabla.inicio;
+    printf("\tPos\tID\tDir\tTipo\tVar\n");
+    while (sim != NULL) {
+        S_imprimir(sim);
+        sim = sim.siguente;
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: S_imprimir()
+--Descripcion: Funcion para imprimir un registro
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 26 Mayo 2020
 */
-void S_imprimir(){}
+void S_imprimir(Simbolo *sim){
+    printf("\t%d\t%s\t%d\t%d\t%s\n", sim.pos, sim.id, sim.dir, sim.tipo, sim.var);
+}
 
 #endif
