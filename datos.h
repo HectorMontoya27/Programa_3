@@ -6,7 +6,7 @@ typedef struct {
     char id[32];
     int dir;
     int tipo;
-    var char[32];
+    char var[32];
     Simbolo *siguente;
 } Simbolo;
 
@@ -36,7 +36,7 @@ typedef struct {
     T_Simbolos *inicio;
     T_Simbolos *cabeza;
     int num;
-} Pila_T_Timbolos;
+} Pila_T_Simbolos;
 
 typedef struct {
     T_Tipos *inicio;
