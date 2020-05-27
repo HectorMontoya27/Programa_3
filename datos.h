@@ -8,6 +8,7 @@ typedef struct {
     int tipo;
     char var[32];
     Simbolo *siguente;
+    Simbolo *anterior;
 } Simbolo;
 
 typedef struct {
@@ -16,6 +17,7 @@ typedef struct {
     int tam;
     int tipoBase;
     Tipo *siguente;
+    Tipo *anterior;
 } Tipo;
 
 typedef struct {
@@ -23,6 +25,7 @@ typedef struct {
     simbolo *cabeza;
     int num;
     T_Simbolos *siguente;
+    T_Simbolos *anterior;
 } T_Simbolos;
 
 typedef struct {
@@ -30,6 +33,7 @@ typedef struct {
     tipo *cabeza;
     int num;
     T_Tipos *siguente;
+    T_Tipos *anterior;
 } T_Tipos;
 
 typedef struct {

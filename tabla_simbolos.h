@@ -85,6 +85,7 @@ void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
         pila.num = 1;
     } else {
         pila.cabeza.siguente = tabla;
+        tabla.anterior = pila.cabeza;
         pila.cabeza = tabla;
         pila.num = pila.num + 1;
     }
@@ -107,6 +108,7 @@ void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
     } else {
         sim.dir = tabla.cabeza.dir + TT_getTam(sim.tipo);
         tabla.cabeza.siguente = sim;
+        sim.anterior = tabla.cabeza;
         tabla.cabeza = sim;
         tabla.num = tabla.num + 1;
         sim.pos = tabla.num;
