@@ -34,7 +34,7 @@ struct SIMBOLO{
 typedef struct TIPO Tipo;
 struct TIPO{
     int id;
-    char nombre[10];
+    char nombre[20];
     int tam;
     int tipoBase;
     Tipo *siguente;
@@ -45,6 +45,7 @@ struct TIPO{
 typedef struct T_SIMBOLOS T_Simbolos;
 struct T_SIMBOLOS{
     char nombre[32];
+    int dirMax;
     Simbolo *inicio;
     Simbolo *cabeza;
     int num;

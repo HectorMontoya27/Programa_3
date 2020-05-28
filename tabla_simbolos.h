@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "datos.h"
+#include "tabla_tipos.h"
 
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
@@ -62,11 +63,15 @@ Pila_T_Simbolos* PTS_nueva(){
 --Fecha de modificacion: 27 Mayo 2020
 --Autor modificacion: Héctor Montoya Pérez
 --Descripcion de modificacion: Se agrega un argumento para el nombre de la tabla
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrego la inicializacion de una nueva variable dirMax
 */
 T_Simbolos* TS_nueva(char nombre[]){
     T_Simbolos *tabla;
     tabla = (T_Simbolos *)malloc(sizeof(T_Simbolos));
     strcpy(tabla->nombre,nombre);
+    tabla->dirMax = 0;
     tabla->num = 0;
     return tabla;
 }
@@ -79,15 +84,22 @@ T_Simbolos* TS_nueva(char nombre[]){
 --Fecha de modificacion: 27 Mayo 2020
 --Autor modificacion: Héctor Montoya Pérez
 --Descripcion de modificacion: Se agrego argumentos a la funcion para agregar la lista de argumentos y tamaño
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se inicializaron las variables faltantes
 */
 Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs){
     Simbolo *sim;
     sim = malloc(sizeof(Simbolo));
+    sim->pos = -1;
     strcpy(sim->id,id);
+    sim->dir = -1;
     sim->tipo = tipo;
     strcpy(sim->var,var);
     sim->lista = lista;
     sim->numArgs = numArgs;
+    sim->siguente = NULL;
+    sim->anterior = NULL;
     return sim;
 }
 
@@ -96,9 +108,13 @@ Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs){
 --Descripcion: Push a la pila de Tabla de simbolos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Se agregaron corretamente la validacion de la existencia de los argumentos
+--Descripcion de modificacion:
 */
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
-    if (pila = NULL){ printf("No existe pila\n"); }
+    if (pila == NULL) { printf("ERROR: No existe pila\n"); }
+    if (tabla == NULL) { printf("ERROR: No existe tabla\n"); }
     if (pila->num == 0 || pila->inicio == NULL) {
         pila->inicio = tabla;
         pila->cabeza = tabla;
@@ -116,22 +132,29 @@ void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
 --Descripcion: Nuevo registro a una tabla de simbolos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 27 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrego una nueva variable dirMax que contendra la direccion donde se almacena
+                               el siguente simbolo y se agregaron las correctas validaciones de los argumentos
 */
 void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
-    if (tabla == NULL){ printf("No existe tabla\n"); }
+    if (tabla == NULL) { printf("ERROR: No existe tabla\n"); }
+    if (sim == NULL) { printf("ERROR: No existe el simbolo\n"); }
     if (tabla->num == 0 || tabla->inicio == NULL){
         tabla->inicio = sim;
         tabla->cabeza = sim;
         tabla->num = 1;
-        sim->pos = 1;
+        sim->pos = 0;
         sim->dir = 0;
+        tabla->dirMax = tabla->dirMax + TT_getTam(sim->tipo);
     } else {
-        sim->dir = tabla->cabeza->dir + TT_getTam(sim->tipo);
         tabla->cabeza->siguente = sim;
         sim->anterior = tabla->cabeza;
         tabla->cabeza = sim;
-        tabla->num = tabla->num + 1;
+        sim->dir = tabla->dirMax;
+        tabla->dirMax = tabla->dirMax + TT_getTam(sim->tipo);
         sim->pos = tabla->num;
+        tabla->num = tabla->num + 1;
     }
 }
 
