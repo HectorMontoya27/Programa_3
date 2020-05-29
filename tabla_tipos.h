@@ -13,15 +13,16 @@ Tipo* T_nuevo(char nombre[], int tam, int tipoBase);            //Lista
 void PTT_push(Pila_T_Tipos *pila, T_Tipos *tabla);              //Lista
 void TT_nuevoRegistro(T_Tipos *tabla, Tipo *t);                 //Lista
 /* Eliminacion */
-void PTT_eliminar();                                            //Pendiente
-T_Tipos TT_pop();                                               //Pendiente
-void T_eliminar();                                              //Pendiente
+void PTT_eliminar(Pila_T_Tipos *pila);                          //Lista
+T_Tipos* PTT_pop(Pila_T_Tipos *pila);                           //Lista
+void TT_eliminar(T_Tipos *tabla);                               //Lista
+void T_eliminar(Tipo *t);                                       //Lista
 /* Impresion */
-void PTT_imprimir();                                            //Pendiente
-void TT_imprimir();                                             //Pendiente
-void T_imprimir();                                              //Pendiente
+void PTT_imprimir(Pila_T_Tipos *pila);                          //Lista
+void TT_imprimir(T_Tipos *tabla);                               //Lista
+void T_imprimir(Tipo *t);                                       //Lista
 /* Busqueda */
-int TT_getTam(int tipo);                                        //Pendiente
+int TT_getTam(T_Tipos *tabla, int tipo);                        //Lista
 
 /* --------------------------- Formato de Documentacion ------------------------- */
 
@@ -132,59 +133,122 @@ void TT_nuevoRegistro(T_Tipos *tabla, Tipo *t){
 }
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTT_eliminar()
+--Descripcion: Eliminacion de la pila y liberar cada tabla de la pila
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-void PTT_eliminar(){}
+void PTT_eliminar(Pila_T_Tipos *pila){
+    while (pila->num != 0) {
+        TT_eliminar(PTS_pop(pila));
+    }
+    free(pila);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTT_pop()
+--Descripcion: Se le aplica un pop a la pila de tablas de tipos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-T_Tipos TT_pop(){}
+T_Tipos* PTT_pop(Pila_T_Tipos *pila){
+    T_Tipos *tabla;
+    if(pila->cabeza == NULL) { return NULL; }
+    tabla = pila->cabeza;
+    pila->cabeza = tabla->anterior;
+    if (pila->cabeza != NULL) {pila->cabeza->siguente = NULL;}
+    else {pila->inicio = NULL;}
+    pila->num = pila->num - 1;
+    tabla->siguente = NULL;
+    tabla->anterior = NULL;
+    return tabla;
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: TT_eliminar()
+--Descripcion: Se libera la memoria de la tabla pero primero se liberan los registros
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-void T_eliminar(){}
+void TT_eliminar(T_Tipos *tabla){
+    Tipo *t, *t2;
+    t = tabla->inicio;
+    while (t != NULL) {
+        t2 = t->siguente;
+        T_eliminar(t);
+        t = t2;
+    }
+    free(tabla);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: T_eliminar()
+--Descripcion: Liberacion de memoria para un tipo
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-void PTT_imprimir(){}
+void T_eliminar(Tipo *t){
+    free(t);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: PTT_imprimir()
+--Descripcion: Impresion de un pila de tablas de tipos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-void TT_imprimir(){}
+void PTT_imprimir(Pila_T_Tipos *pila){
+    T_Tipos *tabla;
+    tabla = pila->inicio;
+    printf("\t\tTABLAS DE LA PILA \"%s\"\n",pila->nombre);
+    while (tabla != NULL) {
+        printf("\n");
+        TT_imprimir(tabla);
+        tabla = tabla->siguente;
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: TT_imprimir()
+--Descripcion: Impresion de la tabla de tipos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-void T_imprimir(){}
+void TT_imprimir(T_Tipos *tabla){
+    Tipo *t;
+    t = tabla->inicio;
+    printf("\tID\tNombre\ttam\tTipoBase\n");
+    while (t != NULL) {
+        T_imprimir(t);
+        t = t->siguente;
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: T_imprimir()
+--Descripcion: Impresion de la un tipo
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
 */
-int TT_getTam(int tipo){}
+void T_imprimir(Tipo *t){
+    printf("\t%d\t%s\t%d\t%d\n", t->id, t->nombre, t->tam, t->tipoBase);
+}
+
+/*
+--Nombre Funcion: TT_getTam()
+--Descripcion: Se hace una busqueda del tamaño de un tipo
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 28 Mayo 2020
+*/
+int TT_getTam(T_Tipos *tabla, int tipo){
+    Tipo *t;
+    if (tabla == NULL || tipo > -1 || tabla->inicio == NULL) { return -1; }
+    t = tabla->inicio;
+    while (t != NULL) {
+        if (t->id == tipo) { return t->tam }
+        t = t->siguente;
+    }
+    return -1;
+}
 
 #endif

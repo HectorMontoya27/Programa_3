@@ -19,9 +19,9 @@ T_Simbolos* PTS_pop(Pila_T_Simbolos *pila);                                     
 void TS_eliminar(T_Simbolos *tabla);                                                  //Lista
 void S_eliminar(Simbolo *sim);                                                        //Lista
 /* Impresion */
-void PTS_imprimir();                                                                  //Lista
-void TS_imprimir();                                                                   //Lista
-void S_imprimir();                                                                    //Lista
+void PTS_imprimir(Pila_T_Simbolos *pila);                                             //Lista
+void TS_imprimir(T_Simbolos *tabla);                                                  //Lista
+void S_imprimir(Simbolo *sim);                                                        //Lista
 /* Busqueda */
 
 /* --------------------------- Formato de Documentacion ------------------------- */
@@ -222,11 +222,14 @@ void S_eliminar(Simbolo *sim){
 --Descripcion: Funcion para imprimir una pila de tabla de simbolos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 28 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrego el nombre de la pila
 */
 void PTS_imprimir(Pila_T_Simbolos *pila){
     T_Simbolos *tabla;
     tabla = pila->inicio;
-    printf("   TABLAS DE LA PILA\n");
+    printf("\t\tTABLAS DE LA PILA \"%s\"\n",pila->nombre);
     while (tabla != NULL) {
         printf("\n");
         TS_imprimir(tabla);
