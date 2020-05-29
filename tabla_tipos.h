@@ -140,7 +140,7 @@ void TT_nuevoRegistro(T_Tipos *tabla, Tipo *t){
 */
 void PTT_eliminar(Pila_T_Tipos *pila){
     while (pila->num != 0) {
-        TT_eliminar(PTS_pop(pila));
+        TT_eliminar(PTT_pop(pila));
     }
     free(pila);
 }
@@ -200,7 +200,7 @@ void T_eliminar(Tipo *t){
 void PTT_imprimir(Pila_T_Tipos *pila){
     T_Tipos *tabla;
     tabla = pila->inicio;
-    printf("\t\tTABLAS DE LA PILA \"%s\"\n",pila->nombre);
+    printf("\t\tTABLAS DE LA PILA\n");
     while (tabla != NULL) {
         printf("\n");
         TT_imprimir(tabla);
@@ -217,6 +217,7 @@ void PTT_imprimir(Pila_T_Tipos *pila){
 void TT_imprimir(T_Tipos *tabla){
     Tipo *t;
     t = tabla->inicio;
+    printf("\tTabla de Tipos \"%s\"\n", tabla->nombre);
     printf("\tID\tNombre\ttam\tTipoBase\n");
     while (t != NULL) {
         T_imprimir(t);
@@ -245,7 +246,7 @@ int TT_getTam(T_Tipos *tabla, int tipo){
     if (tabla == NULL || tipo > -1 || tabla->inicio == NULL) { return -1; }
     t = tabla->inicio;
     while (t != NULL) {
-        if (t->id == tipo) { return t->tam }
+        if (t->id == tipo) { return t->tam; }
         t = t->siguente;
     }
     return -1;

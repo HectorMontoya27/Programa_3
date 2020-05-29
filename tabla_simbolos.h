@@ -12,7 +12,7 @@ Pila_T_Simbolos* PTS_nueva();                                                   
 T_Simbolos* TS_nueva(char nombre[]);                                                  //Lista
 Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs);       //Lista
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);                              //Lista
-void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim);                               //Lista
+void TS_nuevoRegistro(T_Tipos *tablaT, T_Simbolos* tabla, Simbolo* sim);              //Lista
 /* Eliminacion */
 void PTS_eliminar(Pila_T_Simbolos *pila);                                             //Lista
 T_Simbolos* PTS_pop(Pila_T_Simbolos *pila);                                           //Lista
@@ -137,7 +137,7 @@ void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla){
 --Descripcion de modificacion: Se agrego una nueva variable dirMax que contendra la direccion donde se almacena
                                el siguente simbolo y se agregaron las correctas validaciones de los argumentos
 */
-void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
+void TS_nuevoRegistro(T_Tipos *tablaT, T_Simbolos* tabla, Simbolo* sim){
     if (tabla == NULL) { printf("ERROR: No existe tabla\n"); }
     if (sim == NULL) { printf("ERROR: No existe el simbolo\n"); }
     if (tabla->num == 0 || tabla->inicio == NULL){
@@ -146,13 +146,13 @@ void TS_nuevoRegistro(T_Simbolos* tabla, Simbolo* sim){
         tabla->num = 1;
         sim->pos = 0;
         sim->dir = 0;
-        tabla->dirMax = tabla->dirMax + TT_getTam(sim->tipo);
+        tabla->dirMax = tabla->dirMax + TT_getTam(tablaT, sim->tipo);
     } else {
         tabla->cabeza->siguente = sim;
         sim->anterior = tabla->cabeza;
         tabla->cabeza = sim;
         sim->dir = tabla->dirMax;
-        tabla->dirMax = tabla->dirMax + TT_getTam(sim->tipo);
+        tabla->dirMax = tabla->dirMax + TT_getTam(tablaT, sim->tipo);
         sim->pos = tabla->num;
         tabla->num = tabla->num + 1;
     }
@@ -229,7 +229,7 @@ void S_eliminar(Simbolo *sim){
 void PTS_imprimir(Pila_T_Simbolos *pila){
     T_Simbolos *tabla;
     tabla = pila->inicio;
-    printf("\t\tTABLAS DE LA PILA \"%s\"\n",pila->nombre);
+    printf("\t\tTABLAS DE LA PILA\n");
     while (tabla != NULL) {
         printf("\n");
         TS_imprimir(tabla);
@@ -246,6 +246,7 @@ void PTS_imprimir(Pila_T_Simbolos *pila){
 void TS_imprimir(T_Simbolos *tabla){
     Simbolo *sim;
     sim = tabla->inicio;
+    printf("\tTabla de Simbolos \"%s\"\n", tabla->nombre);
     printf("\tPos\tID\tDir\tTipo\tVar\n");
     while (sim != NULL) {
         S_imprimir(sim);
