@@ -47,11 +47,16 @@ void S_imprimir(Simbolo *sim);                                                  
 --Descripcion: Creacion de memoria para una nueva pila de tablas de simbolos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 30 Mayo 2020
+--Autor modificacion: Héctor Montoya
+--Descripcion de modificacion: Se agrego la inicializacion de NULL a las variables
 */
 Pila_T_Simbolos* PTS_nueva(){
     Pila_T_Simbolos *pila;
     pila = (Pila_T_Simbolos *)malloc(sizeof(Pila_T_Simbolos));
     pila->num = 0;
+    pila->inicio = NULL;
+    pila->cabeza = NULL;
     return pila;
 }
 
@@ -66,6 +71,9 @@ Pila_T_Simbolos* PTS_nueva(){
 --Fecha de modificacion: 27 Mayo 2020
 --Autor modificacion: Héctor Montoya Pérez
 --Descripcion de modificacion: Se agrego la inicializacion de una nueva variable dirMax
+--Fecha de modificacion: 30 Mayo 2020
+--Autor modificacion: Héctor Montoya
+--Descripcion de modificacion: Se agrego la inicializacion de NULL a las variables
 */
 T_Simbolos* TS_nueva(char nombre[]){
     T_Simbolos *tabla;
@@ -73,6 +81,10 @@ T_Simbolos* TS_nueva(char nombre[]){
     strcpy(tabla->nombre,nombre);
     tabla->dirMax = 0;
     tabla->num = 0;
+    tabla->inicio = NULL;
+    tabla->cabeza = NULL;
+    tabla->siguente = NULL;
+    tabla->anterior = NULL;
     return tabla;
 }
 

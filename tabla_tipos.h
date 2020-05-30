@@ -47,11 +47,16 @@ int TT_getTam(T_Tipos *tabla, int tipo);                        //Lista
 --Descripcion: Creacion de una nueva pila para tablas de tipos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 27 Mayo 2020
+--Fecha de modificacion: 30 Mayo 2020
+--Autor modificacion: Héctor Montoya
+--Descripcion de modificacion: Se agrego la inicializacion de NULL a las variables
 */
 Pila_T_Tipos* PTT_nueva(){
     Pila_T_Tipos *pila;
     pila = (Pila_T_Tipos *)malloc(sizeof(Pila_T_Tipos));
     pila->num = 0;
+    pila->inicio = NULL;
+    pila->cabeza = NULL;
     return pila;
 }
 
@@ -60,12 +65,19 @@ Pila_T_Tipos* PTT_nueva(){
 --Descripcion: Creacion de una nueva tabla de tipos
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 27 Mayo 2020
+--Fecha de modificacion: 30 Mayo 2020
+--Autor modificacion: Héctor Montoya
+--Descripcion de modificacion: Se agrego la inicializacion de NULL a las variables
 */
 T_Tipos* TT_nueva(char nombre[]){
     T_Tipos *tabla;
     tabla = (T_Tipos *)malloc(sizeof(T_Tipos));
     tabla->num = 0;
     strcpy(tabla->nombre,nombre);
+    tabla->inicio = NULL;
+    tabla->cabeza = NULL;
+    tabla->siguente = NULL;
+    tabla->anterior = NULL;
     return tabla;
 }
 
@@ -216,12 +228,14 @@ void PTT_imprimir(Pila_T_Tipos *pila){
 */
 void TT_imprimir(T_Tipos *tabla){
     Tipo *t;
-    t = tabla->inicio;
-    printf("\tTabla de Tipos \"%s\"\n", tabla->nombre);
-    printf("\tID\tNombre\ttam\tTipoBase\n");
-    while (t != NULL) {
-        T_imprimir(t);
-        t = t->siguente;
+    if (tabla != NULL) {
+        t = tabla->inicio;
+        printf("\tTabla de Tipos \"%s\"\n", tabla->nombre);
+        printf("\tID\tNombre\ttam\tTipoBase\n");
+        while (t != NULL) {
+            T_imprimir(t);
+            t = t->siguente;
+        }
     }
 }
 
@@ -243,7 +257,7 @@ void T_imprimir(Tipo *t){
 */
 int TT_getTam(T_Tipos *tabla, int tipo){
     Tipo *t;
-    if (tabla == NULL || tipo > -1 || tabla->inicio == NULL) { return -1; }
+    if (tabla == NULL || tipo < 0 || tabla->inicio == NULL) { return -1; }
     t = tabla->inicio;
     while (t != NULL) {
         if (t->id == tipo) { return t->tam; }
