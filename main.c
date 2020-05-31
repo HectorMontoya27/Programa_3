@@ -39,7 +39,10 @@ int main(int argc, char const *argv[]) {
     TS_nuevoRegistro(nuevaPilaT->cabeza,nuevaPilaS->cabeza,S_nuevo("ty",0,"fun",nuevaLista));
     PTT_imprimir(nuevaPilaT);
     PTS_imprimir(nuevaPilaS);
+    TS_eliminar(PTS_pop(nuevaPilaS));
+    PTS_imprimir(nuevaPilaS);
     PTT_eliminar(nuevaPilaT);
     PTS_eliminar(nuevaPilaS);
+
     return 0;
 }
