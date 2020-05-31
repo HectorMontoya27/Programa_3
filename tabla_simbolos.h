@@ -5,12 +5,13 @@
 #include <string.h>
 #include "datos.h"
 #include "tabla_tipos.h"
+#include "lista_arg.h"
 
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
 Pila_T_Simbolos* PTS_nueva();                                                         //Lista
 T_Simbolos* TS_nueva(char nombre[]);                                                  //Lista
-Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs);       //Lista
+Simbolo* S_nuevo(char id[], int tipo,char var[], listaArg* lista);                    //Lista
 void PTS_push(Pila_T_Simbolos *pila, T_Simbolos *tabla);                              //Lista
 void TS_nuevoRegistro(T_Tipos *tablaT, T_Simbolos* tabla, Simbolo* sim);              //Lista
 /* Eliminacion */
@@ -100,8 +101,10 @@ T_Simbolos* TS_nueva(char nombre[]){
 --Autor modificacion: Héctor Montoya Pérez
 --Descripcion de modificacion: Se inicializaron las variables faltantes
 */
-Simbolo* S_nuevo(char id[], int tipo,char var[], list_arg* lista, int numArgs){
+Simbolo* S_nuevo(char id[], int tipo,char var[], listaArg* lista){
     Simbolo *sim;
+    int numArgs = -1;
+    if (lista != NULL){ numArgs = lista->tam; }
     sim = malloc(sizeof(Simbolo));
     sim->pos = -1;
     strcpy(sim->id,id);
@@ -258,8 +261,8 @@ void PTS_imprimir(Pila_T_Simbolos *pila){
 void TS_imprimir(T_Simbolos *tabla){
     Simbolo *sim;
     sim = tabla->inicio;
-    printf("\tTabla de Simbolos \"%s\"\n", tabla->nombre);
-    printf("\tPos\tID\tDir\tTipo\tVar\n");
+    printf("\n\tTabla de Simbolos \"%s\"\n", tabla->nombre);
+    printf("\tPos\tID\tDir\tTipo\tVar\tnumArgs\tArgumentos\n");
     while (sim != NULL) {
         S_imprimir(sim);
         sim = sim->siguente;
@@ -271,9 +274,14 @@ void TS_imprimir(T_Simbolos *tabla){
 --Descripcion: Funcion para imprimir un registro
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 26 Mayo 2020
+--Fecha de modificacion: 31 Mayo 2020
+--Autor modificacion: Héctor Montoya Pérez
+--Descripcion de modificacion: Se agrego la impresion de la lista de argumentos
 */
 void S_imprimir(Simbolo *sim){
-    printf("\t%d\t%s\t%d\t%d\t%s\n", sim->pos, sim->id, sim->dir, sim->tipo, sim->var);
+    printf("\t%d\t%s\t%d\t%d\t%s\t%d\t", sim->pos, sim->id, sim->dir, sim->tipo, sim->var, sim->numArgs);
+    imprimirLista(sim->lista);
+    printf("\n");
 }
 
 #endif

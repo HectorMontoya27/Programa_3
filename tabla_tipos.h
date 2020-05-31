@@ -230,7 +230,7 @@ void TT_imprimir(T_Tipos *tabla){
     Tipo *t;
     if (tabla != NULL) {
         t = tabla->inicio;
-        printf("\tTabla de Tipos \"%s\"\n", tabla->nombre);
+        printf("\n\tTabla de Tipos \"%s\"\n", tabla->nombre);
         printf("\tID\tNombre\ttam\tTipoBase\n");
         while (t != NULL) {
             T_imprimir(t);

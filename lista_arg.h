@@ -7,17 +7,18 @@
 
 /* -------------------------Declaracion de Funciones -------------------------- */
 /* Creacion */
-list_arg* nuevaLista();               //Pendiente
-arg* nuevoArg();                      //Pendiente
-void agregarArg(list_arg* lista);     //Pendiente
+listaArg *crearListaArg();                //Lista
+arg* crearArg(int tipo);                  //Lista
+void agregarArg(listaArg *la, int tipo);  //Lista
 /* Eliminar */
-void eliminarLista(list_arg* lista);  //Pendiente
-void eliminarArg(arg* arg);           //Pendiente
+void borrarlistaArg(listaArg *la);        //Lista
+void borrarArgs(arg *a);                  //Lista
 /* Impresion */
-void imprimirLista(list_arg* lista);  //Pendiente
-void imprimirArg(arg* arg);           //Pendiente
+void imprimirLista(listaArg* lista);      //Pendiente
+void imprimirArg(arg* arg);               //Pendiente
 /* Busqueda */
-int getTipo(arg* arg);                //Pendiente
+int getTipo(arg* arg);                    //Pendiente
+int getTamlistaArg(listaArg *la);         //Lista
 
 /* --------------------------- Formato de Documentacion ------------------------- */
 
@@ -38,60 +39,98 @@ int getTipo(arg* arg);                //Pendiente
 /* -------------------------------- Funciones -------------------------------- */
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: crearListaArg()
+--Descripcion: Creacion de una nueva lista de argumentos
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
 */
-list_arg* nuevaLista(){}
+listaArg *crearListaArg(){
+    listaArg *Nueva = (listaArg*)malloc(sizeof(listaArg));
+    Nueva->tam = 0;
+    Nueva->inicio = NULL;
+    return Nueva;
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: crearArg()
+--Descripcion: Creacion de un nuevo argumento
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
 */
-arg* nuevoArg(){}
+arg* crearArg(int tipo){
+    arg *Nuevo = (arg*)malloc(sizeof(arg));
+    Nuevo->tipo = tipo;
+    Nuevo->siguente = NULL;
+    return Nuevo;
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: agregarArg()
+--Descripcion: Se agrega un nuevo tipo a la lista
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
 */
-void agregarArg(list_arg* lista){}
+void agregarArg(listaArg *la, int tipo){
+    if (la->inicio == NULL){
+        la->inicio = crearArg(tipo);
+        la->tam ++;
+    } else {
+        arg *Aux = la->inicio;
+        while(Aux->siguente != NULL){
+            Aux = Aux->siguente;
+        }
+        Aux->siguente = crearArg(tipo);
+        la->tam ++;
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: borrarlistaArg()
+--Descripcion: Eliminacion de memoria para una lista de argumento pero primero se liberan los argumentos
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
 */
-void eliminarLista(list_arg* lista){}
+void borrarlistaArg(listaArg *la){
+    if (la->inicio != NULL){ borrarArgs(la->inicio); }
+    free(la);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: borrarArgs()
+--Descripcion: Borra la memoria  de los argumentos 1 a 1
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
 */
-void eliminarArg(arg* arg){}
+void borrarArgs(arg *a){
+    if(a->siguente != NULL){ borrarArgs(a->siguente); }
+    free(a);
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: imprimirLista(list_arg* lista)
+--Descripcion: Impresion de una lista de argimentos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 31 Mayo 2020
 */
-void imprimirLista(list_arg* lista){}
+void imprimirLista(listaArg* lista){
+    if (lista != NULL) {
+        arg *arg = lista->inicio;
+        while (arg != NULL) {
+            imprimirArg(arg);
+            arg = arg->siguente;
+        }
+    }
+}
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: imprimirArg(arg* arg)
+--Descripcion: Impresion de un argumento
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 31 Mayo 2020
 */
-void imprimirArg(arg* arg){}
+void imprimirArg(arg *arg){
+    printf(" %d", arg->tipo);
+}
 
 /*
 --Nombre Funcion:
@@ -100,5 +139,15 @@ void imprimirArg(arg* arg){}
 --Fecha de creacion:
 */
 int getTipo(arg* arg){}
+
+/*
+--Nombre Funcion: getTamlistaArg()
+--Descripcion: Funcion que retorna el numero de elementos que tiene la lista
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
+*/
+int getTamlistaArg(listaArg *la){
+    return la->tam;
+}
 
 #endif

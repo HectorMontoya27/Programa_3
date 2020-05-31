@@ -9,10 +9,9 @@ struct ARG{
 };
 
 /* Lista de argumentos */
-typedef struct LIST_ARG list_arg;
+typedef struct LIST_ARG listaArg;
 struct LIST_ARG{
     arg *inicio;
-    arg *final;
     int tam;
 };
 
@@ -24,7 +23,7 @@ struct SIMBOLO{
     int dir;
     int tipo;
     char var[32];
-    list_arg *lista;
+    listaArg *lista;
     int numArgs;
     Simbolo *siguente;
     Simbolo *anterior;
