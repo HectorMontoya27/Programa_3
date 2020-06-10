@@ -25,7 +25,7 @@ int existeID(T_Simbolos *sim, char id[]);                                       
 Simbolo* getSimbolo(T_Simbolos *tabla, int posicion);                           //Lista
 int getTipo(T_Simbolos *st, char id[]);                                         //Lista
 listaArg* getArgs(T_Simbolos *ts, char id[]);                                   //Lista
-T_Tipos* getTT(T_Simbolos *tabla);                                              //Pendiente
+T_Tipos* getTT(T_Simbolos *tabla);                                              //Lista
 int getDir(T_Simbolos *st,char id[]);                                           //Pendiente
 char* getVar_TS(T_Simbolos *st, char id[]);                                     //Pendiente
 
