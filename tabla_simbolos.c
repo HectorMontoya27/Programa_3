@@ -142,7 +142,7 @@ void TS_nuevoRegistro(T_Tipos *tablaT, T_Simbolos* tabla, Simbolo* sim){
         tabla->num = 1;
         sim->pos = 0;
         sim->dir = 0;
-        tabla->dirMax = tabla->dirMax + TT_getTam(tablaT, sim->tipo);
+        tabla->dirMax = TT_getTam(tablaT, sim->tipo);
     } else {
         tabla->cabeza->siguente = sim;
         sim->anterior = tabla->cabeza;
@@ -263,4 +263,106 @@ void S_imprimir(Simbolo *sim){
     printf("\t%d\t%s\t%d\t%d\t%s\t%d\t", sim->pos, sim->id, sim->dir, sim->tipo, sim->var, sim->numArgs);
     imprimirLista(sim->lista);
     printf("\n");
+}
+
+/*
+--Nombre Funcion: existeID()
+--Descripcion:  Pregunta si existe el ID en una tabla de simbolos, si existe regresara la posicion de la tabla
+                en donde se encuentra Y si no regresara un -1
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
+*/
+int existeID(T_Simbolos *st, char id[]){
+    if (st == NULL || strcmp(Aux->id,"") == 0) { return -1; }
+    int count = 0;
+    Simbolo *Aux = st->inicio;
+    while(Aux != NULL){
+        if(strcmp(Aux->id,id) == 0){ return count; }
+        count++;
+        Aux = Aux->siguente;
+    }
+    return -1;
+}
+
+/*
+--Nombre Funcion: getSimbolo()
+--Descripcion: Retorna el simbolo de una tabla a partir de su simbolo
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 31 Mayo 2020
+*/
+Simbolo* getSimbolo(T_Simbolos *tabla, int posicion){
+    if (tabla == NULL || posicion < 0) { return NULL; }
+    Simbolo *sim;
+    sim = tabla->inicio;
+    while (sim != NULL) {
+        if (sim->pos == posicion) { return sim;  }
+        sim->siguente;
+    }
+    return NULL;
+}
+
+/*
+--Nombre Funcion: getTipo()
+--Descripcion: Regresa el tipo de un id
+--Autor: Soto Vázquez Patricia
+--Fecha de creacion: 31 Mayo 2020
+*/
+int getTipo(T_Simbolos *st, char id[]){
+    int posicion = existeID(st, id);
+    if (posicion == -1){
+        printf("Tipo de id no encontrado\n");
+        return -1;
+    } else {
+        Simbolo *simbolo = getSimbolo(st,posicion);
+        if (simbolo == NULL) { return simbolo->tipo; }
+    }
+    return -1;
+}
+
+/*
+--Nombre Funcion: getArgs()
+--Descripcion: Regresa la lista de argumentos de un simbolo asociado al id
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 09 Junio 2020
+*/
+listaArg* getArgs(T_Simbolos *ts, char id[]){
+    if (ts == NULL) { return NULL; }
+    Simbolo* sim;
+    sim = ts->inicio;
+    while (sim != NULL) {
+        if (strcmp(id,sim->id) == 0) { return sim->lista; }
+        sim = sim->siguente;
+    }
+    return NULL;
+}
+
+/*
+--Nombre Funcion: getTT()
+--Descripcion: regresa la tabla tipos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 09 Junio 2020
+*/
+T_Tipos* getTT(T_Simbolos *tabla){
+    if (tabla == NULL) { return NULL; }
+    return tabla->tt;
+}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+int getDir(T_Simbolos *st,char id[]){
+
+}
+
+/*
+--Nombre Funcion:
+--Descripcion:
+--Autor:
+--Fecha de creacion:
+*/
+char* getVar_TS(T_Simbolos *st, char id[]){
+
 }

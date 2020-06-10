@@ -67,15 +67,17 @@ T_Tipos* TT_nueva(char nombre[]){
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 27 Mayo 2020
 */
-Tipo* T_nuevo(char nombre[], int tam, int tipoBase){
+Tipo* T_nuevo(char nombre[], int tam, int tipoBase, T_Simbolos *tabla){
     Tipo *t;
     t = malloc(sizeof(Tipo));
     t->id = -1;
     strcpy(t->nombre,nombre);
     t->tam = tam;
-    t->tipoBase = tipoBase;
     t->siguente = NULL;
     t->anterior = NULL;
+    t->tipoBase = tipoBase;
+    t->estructura = NULL;
+    if (tipoBase == -1) { t->estructura = tabla; }
     return t;
 }
 
@@ -107,9 +109,9 @@ void PTT_push(Pila_T_Tipos *pila, T_Tipos *tabla){
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 27 Mayo 2020
 */
-void TT_nuevoRegistro(T_Tipos *tabla, Tipo *t){
-    if (tabla == NULL) { printf("ERROR: No existe tabla\n"); }
-    if (t == NULL) { printf("ERROR: No existe el tipo\n"); }
+int TT_nuevoRegistro(T_Tipos *tabla, Tipo *t){
+    if (tabla == NULL) { printf("ERROR: No existe tabla\n"); return -1; }
+    if (t == NULL) { printf("ERROR: No existe el tipo\n"); return -1; }
     if (tabla->inicio == NULL || tabla->num == 0) {
         tabla->inicio = t;
         tabla->cabeza = t;
@@ -122,6 +124,7 @@ void TT_nuevoRegistro(T_Tipos *tabla, Tipo *t){
         t->id = tabla->num;
         tabla->num = tabla->num + 1;
     }
+    return tabla->num;
 }
 
 /*
@@ -244,4 +247,49 @@ int TT_getTam(T_Tipos *tabla, int tipo){
         t = t->siguente;
     }
     return -1;
+}
+
+/*
+--Nombre Funcion: getTablaGlobal()
+--Descripcion: Nos regeresa la tabla global de una pila de tabla de tipos
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 09 Junio 2020
+*/
+T_Tipos* getTablaGlobal(Pila_T_Tipos *pila){
+    if (pila == NULL) { return NULL; }
+    return pila->inicio;
+}
+
+/*
+--Nombre Funcion: getTS()
+--Descripcion: Regresa una tabla de simbolos asociada al tipo definido
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 09 Junio 2020
+*/
+T_Simbolos* getTS(T_Tipos *tabla, int tipo){
+    if (tabla == NULL || tipo < 0) { return NULL; }
+    Tipo *t;
+    t = tabla->inicio;
+    while (t != NULL) {
+        if (t->id == tipo) { return t->estructura; }
+        t = t->siguente;
+    }
+    return NULL;
+}
+
+/*
+--Nombre Funcion: getNombre_TT()
+--Descripcion: Regresa el nombre del tipo asociada al id
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 09 Junio 2020
+*/
+char* getNombre_TT(T_Tipos *tabla, int id){
+    if (tabla == NULL) { return NULL; }
+    Tipo *t;
+    t = tabla->inicio;
+    while (t != NULL) {
+        if (t->id == tipo) { return t->nombre; }
+        t = t->siguente;
+    }
+    return NULL;
 }

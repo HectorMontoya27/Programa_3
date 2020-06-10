@@ -16,5 +16,6 @@ void imprimirArg(arg* arg);               //Lista
 /* Busqueda */
 int getTipo(arg* arg);                    //Lista
 int getTamlistaArg(listaArg *la);         //Lista
+int compararListasArg(listaArg *l1, listaArg *l2); //Pendiente
 
 #endif

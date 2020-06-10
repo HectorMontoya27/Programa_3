@@ -1,6 +1,21 @@
 #ifndef DATOS_H
 #define DATOS_H
 
+/* Registro */
+typedef struct REGISTRO registroChar;
+struct REGISTRO{
+    char resgisttro[16];
+    registroChar *siguente;
+    registroChar *anterior;
+};
+
+/* Lista de registros */
+typedef struct LISTA listaChar;
+struct LISTA{
+    registroChar *inicio;
+    int tam;
+};
+
 /* Argumento */
 typedef struct ARG arg;
 struct ARG{
@@ -36,6 +51,7 @@ struct TIPO{
     char nombre[20];
     int tam;
     int tipoBase;
+    T_Simbolos *estructura
     Tipo *siguente;
     Tipo *anterior;
 };
@@ -48,6 +64,7 @@ struct T_SIMBOLOS{
     Simbolo *inicio;
     Simbolo *cabeza;
     int num;
+    T_Tipos *tt;
     T_Simbolos *siguente;
     T_Simbolos *anterior;
 };
