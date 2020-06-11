@@ -1,8 +1,18 @@
 #ifndef DATOS_H
 #define DATOS_H
 
-/* Registro */
 typedef struct REGISTRO registroChar;
+typedef struct LISTA listaChar;
+typedef struct ARG arg;
+typedef struct LIST_ARG listaArg;
+typedef struct SIMBOLO Simbolo;
+typedef struct TIPO Tipo;
+typedef struct T_SIMBOLOS T_Simbolos;
+typedef struct T_TIPOS T_Tipos;
+typedef struct PILA_T_SIMBOLOS Pila_T_Simbolos;
+typedef struct PILA_T_TIPOS Pila_T_Tipos;
+
+/* Registro */
 struct REGISTRO{
     char resgisttro[16];
     registroChar *siguente;
@@ -10,28 +20,24 @@ struct REGISTRO{
 };
 
 /* Lista de registros */
-typedef struct LISTA listaChar;
 struct LISTA{
     registroChar *inicio;
     int tam;
 };
 
 /* Argumento */
-typedef struct ARG arg;
 struct ARG{
     int tipo;
     arg *siguente;
 };
 
 /* Lista de argumentos */
-typedef struct LIST_ARG listaArg;
 struct LIST_ARG{
     arg *inicio;
     int tam;
 };
 
 /* Registro de simbolos */
-typedef struct SIMBOLO Simbolo;
 struct SIMBOLO{
     int pos;
     char id[32];
@@ -45,19 +51,17 @@ struct SIMBOLO{
 };
 
 /* Registro de tipo */
-typedef struct TIPO Tipo;
 struct TIPO{
     int id;
     char nombre[20];
     int tam;
     int tipoBase;
-    T_Simbolos *estructura
+    T_Simbolos *estructura;
     Tipo *siguente;
     Tipo *anterior;
 };
 
 /* Tabla de simbolos */
-typedef struct T_SIMBOLOS T_Simbolos;
 struct T_SIMBOLOS{
     char nombre[32];
     int dirMax;
@@ -70,7 +74,6 @@ struct T_SIMBOLOS{
 };
 
 /* Tabla de tipos */
-typedef struct T_TIPOS T_Tipos;
 struct T_TIPOS{
     char nombre[32];
     Tipo *inicio;
@@ -81,7 +84,6 @@ struct T_TIPOS{
 };
 
 /* Pila de tablas de simbolos */
-typedef struct PILA_T_SIMBOLOS Pila_T_Simbolos;
 struct PILA_T_SIMBOLOS{
     T_Simbolos *inicio;
     T_Simbolos *cabeza;
@@ -89,7 +91,6 @@ struct PILA_T_SIMBOLOS{
 };
 
 /* Pila de tablas de tipos */
-typedef struct PILA_T_TIPOS Pila_T_Tipos;
 struct PILA_T_TIPOS{
     T_Tipos *inicio;
     T_Tipos *cabeza;

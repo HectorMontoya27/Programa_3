@@ -117,14 +117,6 @@ void imprimirArg(arg *arg){
 }
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
-*/
-int getTipo(arg* arg){}
-
-/*
 --Nombre Funcion: getTamlistaArg()
 --Descripcion: Funcion que retorna el numero de elementos que tiene la lista
 --Autor: Soto Vázquez Patricia
@@ -132,4 +124,20 @@ int getTipo(arg* arg){}
 */
 int getTamlistaArg(listaArg *la){
     return la->tam;
+}
+
+/*
+--Nombre Funcion: compararListasArg()
+--Descripcion: Compara dos listas de argumentos y regresa 1 para verdadero o 0 para falso
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 10 Junio 2020
+*/
+int compararListasArg(listaArg *l1, listaArg *l2){
+    arg *a1,*a2;
+    a1 = l1->inicio;
+    a2 = l2->inicio;
+    while (a1 != NULL || a2 != NULL) {
+        if (a1->tipo != a2->tipo) { return -1; }
+    }
+    return 1;
 }

@@ -21,7 +21,7 @@ void T_imprimir(Tipo *t);                                                       
 /* Busqueda */
 int TT_getTam(T_Tipos *tabla, int tipo);                                        //Lista
 T_Tipos* getTablaGlobal(Pila_T_Tipos *pila);                                    //Lista
-T_Simbolos* getTS(T_Tipos *tabla, int tipo);                                    //Lista
+T_Simbolos* getTS(T_Tipos *tabla, int id);                                      //Lista
 char* getNombre_TT(T_Tipos *tabla, int id);                                     //Lista
 
 #endif

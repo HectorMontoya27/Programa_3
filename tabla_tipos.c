@@ -266,12 +266,12 @@ T_Tipos* getTablaGlobal(Pila_T_Tipos *pila){
 --Autor: Héctor Montoya Pérez
 --Fecha de creacion: 09 Junio 2020
 */
-T_Simbolos* getTS(T_Tipos *tabla, int tipo){
-    if (tabla == NULL || tipo < 0) { return NULL; }
+T_Simbolos* getTS(T_Tipos *tabla, int id){
+    if (tabla == NULL || id < 0) { return NULL; }
     Tipo *t;
     t = tabla->inicio;
     while (t != NULL) {
-        if (t->id == tipo) { return t->estructura; }
+        if (t->id == id) { return t->estructura; }
         t = t->siguente;
     }
     return NULL;
@@ -288,7 +288,7 @@ char* getNombre_TT(T_Tipos *tabla, int id){
     Tipo *t;
     t = tabla->inicio;
     while (t != NULL) {
-        if (t->id == tipo) { return t->nombre; }
+        if (t->id == id) { return t->nombre; }
         t = t->siguente;
     }
     return NULL;

@@ -1,4 +1,4 @@
-#include <stdio.h>
+z#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "datos.h"
@@ -273,7 +273,7 @@ void S_imprimir(Simbolo *sim){
 --Fecha de creacion: 31 Mayo 2020
 */
 int existeID(T_Simbolos *st, char id[]){
-    if (st == NULL || strcmp(Aux->id,"") == 0) { return -1; }
+    if (st == NULL || strcmp(id,"") == 0) { return -1; }
     int count = 0;
     Simbolo *Aux = st->inicio;
     while(Aux != NULL){
@@ -296,7 +296,7 @@ Simbolo* getSimbolo(T_Simbolos *tabla, int posicion){
     sim = tabla->inicio;
     while (sim != NULL) {
         if (sim->pos == posicion) { return sim;  }
-        sim->siguente;
+        sim = sim->siguente;
     }
     return NULL;
 }
@@ -314,7 +314,7 @@ int getTipo(T_Simbolos *st, char id[]){
         return -1;
     } else {
         Simbolo *simbolo = getSimbolo(st,posicion);
-        if (simbolo == NULL) { return simbolo->tipo; }
+        if (simbolo != NULL) { return simbolo->tipo; }
     }
     return -1;
 }
@@ -348,21 +348,33 @@ T_Tipos* getTT(T_Simbolos *tabla){
 }
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: getDir()
+--Descripcion: Returna el valor de dir del simbolo con el id
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 10 Junio 2020
 */
 int getDir(T_Simbolos *st,char id[]){
-
+    if (st == NULL) { return -1; }
+    Simbolo *sim = st->inicio;
+    while (sim != NULL) {
+        if (strcmp(id,sim->id) == 0) { return sim->dir; }
+        sim = sim->siguente;
+    }
+    return -1;
 }
 
 /*
---Nombre Funcion:
---Descripcion:
---Autor:
---Fecha de creacion:
+--Nombre Funcion: getVar_TS()
+--Descripcion: Nos regresa la cadena de var el cual nos dice que tipo de variable es
+--Autor: Héctor Montoya Pérez
+--Fecha de creacion: 10 Junio 2020
 */
 char* getVar_TS(T_Simbolos *st, char id[]){
-
+    if (st == NULL) { return NULL; }
+    Simbolo *sim = st->inicio;
+    while (sim != NULL) {
+        if (strcmp(id,sim->id) == 0) { return sim->var; }
+        sim = sim->siguente;
+    }
+    return NULL;
 }

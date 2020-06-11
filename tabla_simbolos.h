@@ -26,8 +26,8 @@ Simbolo* getSimbolo(T_Simbolos *tabla, int posicion);                           
 int getTipo(T_Simbolos *st, char id[]);                                         //Lista
 listaArg* getArgs(T_Simbolos *ts, char id[]);                                   //Lista
 T_Tipos* getTT(T_Simbolos *tabla);                                              //Lista
-int getDir(T_Simbolos *st,char id[]);                                           //Pendiente
-char* getVar_TS(T_Simbolos *st, char id[]);                                     //Pendiente
+int getDir(T_Simbolos *st,char id[]);                                           //Lista
+char* getVar_TS(T_Simbolos *st, char id[]);                                     //Lista
 
 
 #endif
